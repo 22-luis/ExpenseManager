@@ -1,4 +1,4 @@
-package org.example.expensemanager.entities.dto.Spent;
+package org.example.expensemanager.models.dto.Spent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

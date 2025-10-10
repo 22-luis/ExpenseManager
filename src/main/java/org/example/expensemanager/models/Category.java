@@ -1,4 +1,4 @@
-package org.example.expensemanager.entities;
+package org.example.expensemanager.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

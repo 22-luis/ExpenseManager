@@ -1,4 +1,4 @@
-package org.example.expensemanager.entities.dto.category;
+package org.example.expensemanager.models.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

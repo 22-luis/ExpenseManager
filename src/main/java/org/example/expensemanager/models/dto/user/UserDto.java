@@ -1,9 +1,9 @@
-package org.example.expensemanager.entities.dto.user;
+package org.example.expensemanager.models.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.expensemanager.entities.Role;
+import org.example.expensemanager.models.Role;
 
 import java.util.UUID;
 
@@ -14,6 +14,5 @@ public class UserDto {
     private UUID id;
     private String username;
     private String email;
-    private String password;
     private Role role;
 }

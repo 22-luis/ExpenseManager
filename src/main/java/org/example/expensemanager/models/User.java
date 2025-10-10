@@ -1,4 +1,4 @@
-package org.example.expensemanager.entities;
+package org.example.expensemanager.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,5 +24,5 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role rol;
+    private Role role;
 }
