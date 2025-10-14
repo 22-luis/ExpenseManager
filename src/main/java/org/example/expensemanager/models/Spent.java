@@ -24,7 +24,15 @@ public class Spent {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "archive", nullable = true)
+    @Column(name = "archive")
     private String archive;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
 }
