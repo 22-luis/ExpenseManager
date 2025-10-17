@@ -33,11 +33,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDto;
     }
 
-    private Category findById(UUID id){
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
-    }
-
     @Override
     public CategoryDto createCategory(UUID userId, CategoryDto dto){
 
