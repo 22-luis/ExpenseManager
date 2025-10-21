@@ -15,7 +15,7 @@ public class Spent {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "mount")
+    @Column(name = "mount", nullable = false)
     private Float mount;
 
     @Column(name = "date")
