@@ -23,7 +23,7 @@ public class UserControl {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRequestDto> register(@Valid @RequestBody UserRequestDto dto) throws BadRequestException {
+    public ResponseEntity<UserResponseDto> register(@Valid @RequestBody UserRequestDto dto) throws BadRequestException {
         return new ResponseEntity<>(userService.createUser(dto), HttpStatus.CREATED);
     }
 
@@ -34,7 +34,7 @@ public class UserControl {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UserRequestDto> update(@PathVariable UUID id, @Valid @RequestBody UserRequestDto dto) {
+    public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @Valid @RequestBody UserRequestDto dto) {
         return ResponseEntity.ok(userService.updateUser(id, dto));
     }
 

@@ -26,15 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRequestDto convertRequestToDto(User user) {
-        UserRequestDto dto = new UserRequestDto();
-        dto.setEmail(user.getEmail());
-        dto.setUsername(user.getName());
-        dto.setRole(user.getRole());
-        return dto;
-    }
-
-    @Override
     public UserResponseDto convertResponseToDto(User user) {
         UserResponseDto dto = new UserResponseDto();
         dto.setId(user.getId());
@@ -49,13 +40,8 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
-    private User findByEmail(String email){
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
-    }
-
     @Override
-    public UserRequestDto createUser(UserRequestDto dto) throws BadRequestException {
+    public UserResponseDto createUser(UserRequestDto dto) throws BadRequestException {
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new BadRequestException("Email already exists");
         }
@@ -68,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(user);
 
-        return convertRequestToDto(savedUser);
+        return convertResponseToDto(savedUser);
 
     }
 
@@ -80,21 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto getUserById(@PathVariable UUID id){
-        User user = findById(id);
-
-        return convertResponseToDto(user);
-    }
-
-    @Override
-    public UserResponseDto getUserByEmail(@PathVariable String email) {
-        User user = findByEmail(email);
-
-        return convertResponseToDto(user);
-    }
-
-    @Override
-    public UserRequestDto updateUser(@PathVariable UUID id, UserRequestDto dto) {
+    public UserResponseDto updateUser(@PathVariable UUID id, UserRequestDto dto) {
         User user = findById(id);
 
         if (dto.getUsername() != null) {
@@ -112,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
         User updatedUser = userRepository.save(user);
 
-        return convertRequestToDto(updatedUser);
+        return convertResponseToDto(updatedUser);
     }
 
     @Override

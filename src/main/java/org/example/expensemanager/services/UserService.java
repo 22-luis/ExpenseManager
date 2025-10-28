@@ -10,17 +10,13 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserRequestDto convertRequestToDto(User user);
-
     UserResponseDto convertResponseToDto(User user);
 
-    UserRequestDto createUser(UserRequestDto userDto) throws BadRequestException;
+    UserResponseDto createUser(UserRequestDto userDto) throws BadRequestException;
 
     List<UserResponseDto> getAll();
-    UserResponseDto getUserById(UUID id);
-    UserResponseDto getUserByEmail(String email);
 
-    UserRequestDto updateUser(UUID id, UserRequestDto userDto);
+    UserResponseDto updateUser(UUID id, UserRequestDto userDto);
 
     void deleteUser(UUID id);
 
