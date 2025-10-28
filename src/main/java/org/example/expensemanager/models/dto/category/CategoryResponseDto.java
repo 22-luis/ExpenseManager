@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDto {
+public class CategoryResponseDto {
 
     private UUID id;
 

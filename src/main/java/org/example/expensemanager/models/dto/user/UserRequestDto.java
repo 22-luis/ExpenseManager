@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.expensemanager.models.Role;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private UUID id;
+public class UserRequestDto {
     private String username;
     private String email;
+    private String password;
     private Role role;
 }
