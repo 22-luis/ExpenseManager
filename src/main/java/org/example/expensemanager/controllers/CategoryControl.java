@@ -32,6 +32,17 @@ public class CategoryControl {
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponseDto> getById(@PathVariable UUID id){
+        CategoryResponseDto category = categoryService.getById(id);
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CategoryResponseDto> update(@PathVariable UUID id, @RequestBody CategoryRequestDto dto){
+        return new ResponseEntity<>(categoryService.updateCategory(id, dto), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<CategoryResponseDto> delete(@PathVariable UUID id){
         categoryService.deleteCategory(id);

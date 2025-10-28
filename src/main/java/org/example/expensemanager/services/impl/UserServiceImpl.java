@@ -9,6 +9,7 @@ import org.example.expensemanager.repositories.UserRepository;
 import org.example.expensemanager.services.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.UUID;
@@ -79,21 +80,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto getUserById(UUID id){
+    public UserResponseDto getUserById(@PathVariable UUID id){
         User user = findById(id);
 
         return convertResponseToDto(user);
     }
 
     @Override
-    public UserResponseDto getUserByEmail(String email) {
+    public UserResponseDto getUserByEmail(@PathVariable String email) {
         User user = findByEmail(email);
 
         return convertResponseToDto(user);
     }
 
     @Override
-    public UserRequestDto updateUser(UUID id, UserRequestDto dto) {
+    public UserRequestDto updateUser(@PathVariable UUID id, UserRequestDto dto) {
         User user = findById(id);
 
         if (dto.getUsername() != null) {
@@ -115,7 +116,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UUID id) {
+    public void deleteUser(@PathVariable UUID id) {
         if (!userRepository.existsById(id)) {
             throw new ResourceNotFoundException("user", "id", id);
         }

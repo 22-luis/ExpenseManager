@@ -29,12 +29,9 @@ public class CategoryServiceImpl implements CategoryService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public CategoryRequestDto convertToRequestDto(Category category) {
-        CategoryRequestDto dto = new CategoryRequestDto();
-        dto.setName(category.getName());
-        dto.setDescription(category.getDescription());
-        return dto;
+    private Category findById(UUID id){
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
     }
 
     @Override
@@ -75,7 +72,32 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(UUID id){
+    public CategoryResponseDto getById(@PathVariable UUID id) {
+
+        Category category = findById(id);
+
+        return convertToResponseDto(category);
+    }
+
+    @Override
+    public CategoryResponseDto updateCategory(UUID id, CategoryRequestDto dto) {
+        Category category  = findById(id);
+
+        if (dto.getName() != null) {
+            category.setName(dto.getName());
+        }
+
+        if (dto.getDescription() != null) {
+            category.setDescription(dto.getDescription());
+        }
+
+        categoryRepository.save(category);
+
+        return convertToResponseDto(category);
+    }
+
+    @Override
+    public void deleteCategory(@PathVariable UUID id){
         if (!categoryRepository.existsById(id)) {
             throw new ResourceNotFoundException("category", "id", id);
         }
