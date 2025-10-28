@@ -2,9 +2,8 @@ package org.example.expensemanager.services.impl;
 
 import org.apache.coyote.BadRequestException;
 import org.example.expensemanager.models.User;
-import org.example.expensemanager.models.dto.user.CreateUserRequestDto;
-import org.example.expensemanager.models.dto.user.UpdateUserRequestDto;
-import org.example.expensemanager.models.dto.user.UserDto;
+import org.example.expensemanager.models.dto.user.UserRequestDto;
+import org.example.expensemanager.models.dto.user.UserResponseDto;
 import org.example.expensemanager.exceptions.ResourceNotFoundException;
 import org.example.expensemanager.repositories.UserRepository;
 import org.example.expensemanager.services.UserService;
@@ -26,13 +25,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto convertToDto(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setEmail(user.getEmail());
-        userDto.setUsername(user.getName());
-        userDto.setRole(user.getRole());
-        return userDto;
+    public UserRequestDto convertRequestToDto(User user) {
+        UserRequestDto dto = new UserRequestDto();
+        dto.setEmail(user.getEmail());
+        dto.setUsername(user.getName());
+        dto.setRole(user.getRole());
+        return dto;
+    }
+
+    @Override
+    public UserResponseDto convertResponseToDto(User user) {
+        UserResponseDto dto = new UserResponseDto();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setUsername(user.getName());
+        dto.setRole(user.getRole());
+        return dto;
     }
 
     private User findById(UUID id){
@@ -46,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(CreateUserRequestDto dto) throws BadRequestException {
+    public UserRequestDto createUser(UserRequestDto dto) throws BadRequestException {
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new BadRequestException("Email already exists");
         }
@@ -59,33 +67,33 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(user);
 
-        return convertToDto(savedUser);
+        return convertRequestToDto(savedUser);
 
     }
 
     @Override
-    public List<UserDto> getAll() {
+    public List<UserResponseDto> getAll() {
         return userRepository.findAll().stream()
-                .map(this::convertToDto)
+                .map(this::convertResponseToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserDto getUserById(UUID id){
+    public UserResponseDto getUserById(UUID id){
         User user = findById(id);
 
-        return convertToDto(user);
+        return convertResponseToDto(user);
     }
 
     @Override
-    public UserDto getUserByEmail(String email) {
+    public UserResponseDto getUserByEmail(String email) {
         User user = findByEmail(email);
 
-        return convertToDto(user);
+        return convertResponseToDto(user);
     }
 
     @Override
-    public UserDto updateUser(UUID id, UpdateUserRequestDto dto) {
+    public UserRequestDto updateUser(UUID id, UserRequestDto dto) {
         User user = findById(id);
 
         if (dto.getUsername() != null) {
@@ -103,7 +111,7 @@ public class UserServiceImpl implements UserService {
 
         User updatedUser = userRepository.save(user);
 
-        return convertToDto(updatedUser);
+        return convertRequestToDto(updatedUser);
     }
 
     @Override

@@ -2,24 +2,25 @@ package org.example.expensemanager.services;
 
 import org.apache.coyote.BadRequestException;
 import org.example.expensemanager.models.User;
-import org.example.expensemanager.models.dto.user.CreateUserRequestDto;
-import org.example.expensemanager.models.dto.user.UpdateUserRequestDto;
-import org.example.expensemanager.models.dto.user.UserDto;
+import org.example.expensemanager.models.dto.user.UserRequestDto;
+import org.example.expensemanager.models.dto.user.UserResponseDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
 
-    UserDto convertToDto(User user);
+    UserRequestDto convertRequestToDto(User user);
 
-    UserDto createUser(CreateUserRequestDto userDto) throws BadRequestException;
+    UserResponseDto convertResponseToDto(User user);
 
-    List<UserDto> getAll();
-    UserDto getUserById(UUID id);
-    UserDto getUserByEmail(String email);
+    UserRequestDto createUser(UserRequestDto userDto) throws BadRequestException;
 
-    UserDto updateUser(UUID id, UpdateUserRequestDto userDto);
+    List<UserResponseDto> getAll();
+    UserResponseDto getUserById(UUID id);
+    UserResponseDto getUserByEmail(String email);
+
+    UserRequestDto updateUser(UUID id, UserRequestDto userDto);
 
     void deleteUser(UUID id);
 
