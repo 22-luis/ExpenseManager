@@ -21,7 +21,7 @@ public class Spent {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "archive")
