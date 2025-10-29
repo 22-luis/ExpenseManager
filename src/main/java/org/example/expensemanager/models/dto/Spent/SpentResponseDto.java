@@ -3,7 +3,6 @@ package org.example.expensemanager.models.dto.Spent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.expensemanager.models.User;
 
 import java.util.Date;
 import java.util.UUID;
@@ -25,4 +24,7 @@ public class SpentResponseDto {
         private String archive;
 
         private UUID userId;
+
+        private UUID categoryId;
+
 }
