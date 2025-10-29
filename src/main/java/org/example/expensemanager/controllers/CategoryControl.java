@@ -26,7 +26,7 @@ public class CategoryControl {
         return new ResponseEntity<>(categoryService.createCategory(userId, dto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<CategoryResponseDto>> getByUserId(@PathVariable UUID userId){
         List<CategoryResponseDto> categories = categoryService.getAllByUserId(userId);
         return new ResponseEntity<>(categories, HttpStatus.OK);
