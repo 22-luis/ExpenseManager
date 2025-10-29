@@ -3,18 +3,13 @@ package org.example.expensemanager.models.dto.Spent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.expensemanager.models.User;
 
 import java.util.Date;
-import java.util.UUID;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpentDto {
-
-        private UUID id;
+public class SpentRequestDto {
 
         private Float mount;
 
@@ -24,5 +19,4 @@ public class SpentDto {
 
         private String archive;
 
-        private User user;
 }
