@@ -35,13 +35,13 @@ public class SpentControl {
         return new ResponseEntity<>(spent, HttpStatus.OK);
     }
 
-    @GetMapping("/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<SpentResponseDto>> getAllByCategoryId(@PathVariable UUID categoryId){
         List<SpentResponseDto> spent = spentService.getAllByCategoryId(categoryId);
         return new ResponseEntity<>(spent, HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<SpentResponseDto>> getAllByUserId(@PathVariable UUID userId){
         List<SpentResponseDto> spent = spentService.getAllByUserId(userId);
         return new ResponseEntity<>(spent, HttpStatus.OK);
